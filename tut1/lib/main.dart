@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tut1/answer.dart';
 import 'package:tut1/questions.dart';
 
 void main() => runApp(MyApp());
@@ -23,11 +24,50 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var question = [
-      "What is your favorite food ?",
-      "What is your favorite place to visit ?",
-      "What is your favorite book ?",
-      "What is your favorite person ?",
-      "What is your favorite thing to do ?",
+      {
+        'questionText': "What is your favorite food ?",
+        "answerText": [
+          "Pizza",
+          "Mo:MO",
+          "Samosa",
+          "Bread",
+        ]
+      },
+      {
+        'questionText': "What is your favorite place to visit ?",
+        "answerText": [
+          "Kathmandu",
+          "Bhaktapur",
+          "Lalitpur",
+          "Nuwakot",
+        ]
+      },
+      {
+        'questionText': "What is your favorite book ?",
+        "answerText": [
+          "Feynman lecture",
+          "University Physics",
+          "Grand Design",
+          "Intellegient Investor"
+        ]
+      },
+      {
+        'questionText': "What is your favorite person ?",
+        "answerText": [
+          "Feynman",
+          "Peterson",
+          "Tyson",
+          "˚Kaku",
+        ]
+      },
+      {
+        'questionText': "What is your favorite thing to do ?",
+        "answerText": [
+          "Coding",
+          "Teaching",
+          "Solving math problem",
+        ]
+      },
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -35,27 +75,17 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("My first app"),
           centerTitle: true,
+          backgroundColor: Colors.deepOrange[300],
+          elevation: 0,
         ),
         body: Center(
           child: Column(
             children: [
-              Question(question.elementAt(_questionIndex)),
-              ElevatedButton(
-                onPressed: _answerQuestion,
-                child: const Text("Answer 1"),
-              ),
-              ElevatedButton(
-                onPressed: _answerQuestion,
-                child: const Text("Answer 2"),
-              ),
-              ElevatedButton(
-                onPressed: _answerQuestion,
-                child: const Text("Answer 3"),
-              ),
-              ElevatedButton(
-                onPressed: _answerQuestion,
-                child: const Text("Answer 4"),
-              ),
+              Question(question[_questionIndex]['questionText'] as String),
+              ...(question[_questionIndex]["answerText"] as List<String>)
+                  .map((answer) {
+                return Answer(_answerQuestion, answer);
+              }).toList()
             ],
           ),
         ),
