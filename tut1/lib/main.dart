@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tut1/questions.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,20 +9,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int questionIndex = 0;
+  int _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
-      if (questionIndex < 4)
-        questionIndex += 1;
+      if (_questionIndex < 4)
+        _questionIndex += 1;
       else
-        questionIndex = 1;
+        _questionIndex = 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
+    var question = [
       "What is your favorite food ?",
       "What is your favorite place to visit ?",
       "What is your favorite book ?",
@@ -38,21 +39,21 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              Text(questions.elementAt(questionIndex)),
+              Question(question.elementAt(_questionIndex)),
               ElevatedButton(
-                onPressed: answerQuestion,
+                onPressed: _answerQuestion,
                 child: const Text("Answer 1"),
               ),
               ElevatedButton(
-                onPressed: answerQuestion,
+                onPressed: _answerQuestion,
                 child: const Text("Answer 2"),
               ),
               ElevatedButton(
-                onPressed: answerQuestion,
+                onPressed: _answerQuestion,
                 child: const Text("Answer 3"),
               ),
               ElevatedButton(
-                onPressed: answerQuestion,
+                onPressed: _answerQuestion,
                 child: const Text("Answer 4"),
               ),
             ],
