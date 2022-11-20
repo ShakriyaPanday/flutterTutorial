@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tut1/answer.dart';
-import 'package:tut1/questions.dart';
+import 'package:tut1/quiz.dart';
+import 'package:tut1/result.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final question = const [
+  final _question = const [
     {
       'questionText': "What is your favorite food ?",
       "answerText": [
@@ -66,11 +66,6 @@ class _MyAppState extends State<MyApp> {
       //     _questionIndex = 0;
       //
     });
-    if (_questionIndex < question.length) {
-      print("We have more questions");
-    } else {
-      print("No more question");
-    }
   }
 
   @override
@@ -84,19 +79,13 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.deepOrange[300],
           elevation: 0,
         ),
-        body: _questionIndex < question.length
-            ? Column(
-                children: [
-                  Question(question[_questionIndex]['questionText'] as String),
-                  ...(question[_questionIndex]["answerText"] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  })
-                ],
+        body: _questionIndex < _question.length
+            ? Quiz(
+                answerquestion: _answerQuestion,
+                question: _question,
+                questionIndex: _questionIndex,
               )
-            : Center(
-                child: Text("You did it"),
-              ),
+            : const Result(),
       ),
     );
   }
